@@ -3,23 +3,22 @@ console.log(data);
 //You can start simple and just render a single
 //pokemon card from the first element
 console.log(data[0]);
-console.log(data[0].name);
 
 const UL = document.querySelector("ul");
 
 const CARD = document.createElement("li");
 CARD.className = "card";
 
-UL.appendChild(CARD);
+const POKEMON_TITLE_H2 = document.createElement("h2");
 
-const LI = document.createElement("li");
+function pokemonGetName(dataIndex) {
+  let POKEMON_NAME = Object.values(data[dataIndex])[0];
+  POKEMON_TITLE_H2.textContent =
+    POKEMON_NAME.charAt(0).toUpperCase() + POKEMON_NAME.slice(1);
+  return POKEMON_TITLE_H2;
+}
 
-let test = Object.values(data[0])[4];
-
-console.log(test);
-
-console.log(data[0]);
-
-// LI.textContent = bruh[0];
-
-// CARD.appendChild(LI);
+for (let i = 0; i < data.length; i++) {
+  CARD.appendChild(pokemonGetName(i));
+  UL.appendChild(CARD.cloneNode(true));
+}
