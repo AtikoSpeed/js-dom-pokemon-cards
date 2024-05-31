@@ -17,26 +17,41 @@ const LI = document.createElement("li");
 const POKEMON_TITLE_H2 = document.createElement("h2");
 POKEMON_TITLE_H2.className = "card--title";
 
-function pokemonGetName(dataIndex) {
-  let pokemonName = Object.values(data[dataIndex])[0];
-  POKEMON_TITLE_H2.textContent =
-    pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
-  return POKEMON_TITLE_H2;
-}
+const IMG = document.createElement("img");
+IMG.width = "256";
+IMG.className = "card--img";
 
-function pokemonGetStats(dataIndex) {
-  let pokemonStat = data[dataIndex].stats;
-  CARD_TEXT_UL.innerHTML = "";
-  for (let i = 0; i < pokemonStat.length; i++) {
-    LI.textContent =
-      pokemonStat[i].stat.name.toUpperCase() + ": " + pokemonStat[i].base_stat;
-    CARD_TEXT_UL.appendChild(LI.cloneNode(true));
-  }
-  return CARD_TEXT_UL;
-}
+const pokemon = {
+  getName: function (dataIndex) {
+    let pokemonName = Object.values(data[dataIndex])[0];
+    POKEMON_TITLE_H2.textContent =
+      pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+    return POKEMON_TITLE_H2;
+  },
+  getStats: function (dataIndex) {
+    let pokemonStat = data[dataIndex].stats;
+    CARD_TEXT_UL.innerHTML = "";
+    for (let i = 0; i < pokemonStat.length; i++) {
+      LI.textContent =
+        pokemonStat[i].stat.name.toUpperCase() +
+        ": " +
+        pokemonStat[i].base_stat;
+      CARD_TEXT_UL.appendChild(LI.cloneNode(true));
+    }
+    return CARD_TEXT_UL;
+  },
+  getPic: function (dataIndex) {
+    let pokemonPic =
+      data[dataIndex].sprites.other["official-artwork"].front_default;
+    IMG.src = pokemonPic;
+    console.log(pokemonPic);
+    return IMG;
+  },
+};
 
 for (let i = 0; i < data.length; i++) {
-  CARD_LI.appendChild(pokemonGetName(i));
-  CARD_LI.appendChild(pokemonGetStats(i));
+  CARD_LI.appendChild(pokemon.getName(i));
+  CARD_LI.appendChild(pokemon.getPic(i));
+  CARD_LI.appendChild(pokemon.getStats(i));
   UL.appendChild(CARD_LI.cloneNode(true));
 }
