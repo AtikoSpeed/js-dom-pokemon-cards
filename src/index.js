@@ -28,6 +28,10 @@ const pokemon = {
       pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
     return POKEMON_TITLE_H2;
   },
+  getPic: function (dataIndex) {
+    IMG.src = data[dataIndex].sprites.other["official-artwork"].front_default;
+    return IMG;
+  },
   getStats: function (dataIndex) {
     let pokemonStat = data[dataIndex].stats;
     CARD_TEXT_UL.innerHTML = "";
@@ -39,13 +43,6 @@ const pokemon = {
       CARD_TEXT_UL.appendChild(LI.cloneNode(true));
     }
     return CARD_TEXT_UL;
-  },
-  getPic: function (dataIndex) {
-    let pokemonPic =
-      data[dataIndex].sprites.other["official-artwork"].front_default;
-    IMG.src = pokemonPic;
-    console.log(pokemonPic);
-    return IMG;
   },
 };
 
